@@ -38,39 +38,32 @@ import cv2
 
 
 ######## FRAMES TO VIDEO
-import numpy as np
-import os
-from os.path import isfile, join
+# import numpy as np
+# import os
+# from os.path import isfile, join
 
-def convert_frames_to_video(pathIn,pathOut,fps):
-    frame_array = []
-    files = os.listdir(pathIn)
-    files.sort(key = lambda x: int(x[5:-4]))
+# def convert_frames_to_video(pathIn,pathOut,fps):
 
-    print(files)
+#     frame_array = []
+#     files = os.listdir(pathIn)
+#     files.sort(key = lambda x: int(x[5:-4]))
 
-    for i in range(len(files)):
-        filename=pathIn + files[i]
-        #reading each files
-        img = cv2.imread(filename)
-        height, width, layers = img.shape
-        size = (width,height)
-        print(filename)
-        #inserting the frames into an image array
-        frame_array.append(img)
-    out = cv2.VideoWriter(pathOut,cv2.VideoWriter_fourcc(*'DIVX'), fps, size)
-    for i in range(len(frame_array)):
-        # writing to a image array
-        out.write(frame_array[i])
-    out.release()
+#     for i in range(len(files)):
+#         filename = pathIn + files[i]
+#         img = cv2.imread(filename)
+#         height, width, layers = img.shape
+#         print(filename, height, width, layers)
+#         size = (width,height)
+#         frame_array.append(img)
 
-def main():
-    pathIn= './frames/'
-    pathOut = 'video.avi'
-    fps = 30.0
-    convert_frames_to_video(pathIn, pathOut, fps)
+#     out = cv2.VideoWriter(pathOut,cv2.VideoWriter_fourcc(*'DIVX'), fps, size)
 
-if __name__=="__main__":
-    main()
+#     for i in range(len(frame_array)):
+#         out.write(frame_array[i])
 
+#     out.release()
 
+# pathIn= './frames/'
+# pathOut = 'video.avi'
+# fps = 30.0
+# convert_frames_to_video(pathIn, pathOut, fps)
