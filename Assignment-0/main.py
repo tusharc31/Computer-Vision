@@ -9,7 +9,7 @@ import cv2
 
 
 ###### Reading video and saving frames
-# vid = cv2.VideoCapture("sample_vid.mp4")
+# vid = cv2.VideoCapture("vid2.mp4")
 # count = 0
 
 # while True:
@@ -17,7 +17,7 @@ import cv2
 #     success, img = vid.read()
 #     if success == True:
 #         count = count+1
-#         cv2.imwrite("frames/frame"+str(count)+".jpg", img)
+#         cv2.imwrite("vid2/frame"+str(count)+".jpg", img)
 
 #     else:
 #         break
@@ -63,7 +63,58 @@ import cv2
 
 #     out.release()
 
-# pathIn= './frames/'
-# pathOut = 'video.avi'
-# fps = 30.0
+# pathIn= './vid2/'
+# pathOut = 'vid2.avi'
+# fps = 26.0
 # convert_frames_to_video(pathIn, pathOut, fps)
+
+import cv2
+import numpy as np
+ 
+video = cv2.VideoCapture("vid2.avi")
+image = cv2.imread("test.jpg")
+
+while True:
+ 
+    ret, frame = video.read()
+
+    if ret == True:
+    
+        frame = cv2.resize(frame, (480, 360))
+        image = cv2.resize(image, (480, 360))
+    
+        l_green = np.array([0, 100, 0])
+        u_green = np.array([100, 255, 100])
+    
+        mask = cv2.inRange(frame, l_green, u_green)
+        res = cv2.bitwise_and(frame, frame, mask = mask)
+    
+        f = frame - res
+        f = np.where(f == 0, image, f)
+    
+        cv2.imshow("video", frame)
+        cv2.imshow("mask", f)
+    
+        if cv2.waitKey(25) == 27:
+            break
+
+    else:
+        break
+ 
+video.release()
+cv2.destroyAllWindows()
+
+# vid = cv2.VideoCapture("vid2.mp4")
+# count = 0
+
+# while True:
+
+#     success, img = vid.read()
+#     if success == True:
+#         count = count+1
+#         cv2.imwrite("vid2/frame"+str(count)+".jpg", img)
+
+#     else:
+#         break
+
+# print(f"Total frames: {count}")
